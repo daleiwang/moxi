@@ -55,14 +55,16 @@
 		                        </div>
 		                    </div>
 		                    <div class="ibox-content" style="display: block;">
-		                        <div class="row">
-	                            	<div class="col-sm-3 m-b-xs">
-	                            		<input id="product_name" name="product_name" value="" placeholder="分类名称" class="form-control" type="text"/>
-	                                </div>
-	                                <div class="col-sm-1 m-b-xs">
-	                                    <button class="btn btn-primary btn-block" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;&nbsp;<strong>搜索</strong></button>
-	                                </div>
-	                            </div>
+		                    	<form action="newsCategoryManage_0_0_0">
+			                        <div class="row">
+		                            	<div class="col-sm-3 m-b-xs">
+		                            		<input name="name" value="" placeholder="分类名称" class="form-control" type="text"/>
+		                                </div>
+		                                <div class="col-sm-1 m-b-xs">
+		                                    <button id="submitButton" class="btn btn-primary btn-block" type="submit"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;&nbsp;<strong>搜索</strong></button>
+		                                </div>
+		                            </div>
+	                            </form>
 		                    </div>
 	                	</div>
                 	</div>
@@ -101,19 +103,7 @@
 	                                    <tfoot>
 			                                <tr>
 			                                    <td colspan="7">
-			                                        <ul id="test" class="pagination pull-right">
-			                                        	
-			                                        
-			                                        	<li class="footable-page-arrow"><a href="#first">«</a></li>
-			                                        	<li class="footable-page-arrow "><a href="#prev">‹</a></li>
-			                                        	<li class="footable-page"><a href="#">1</a></li>
-			                                        	<li class="footable-page active"><a href="#">2</a></li>
-			                                        	<li class="footable-page"><a href="#">3</a></li>
-			                                        	<li class="footable-page"><a href="#">4</a></li>
-			                                        	<li class="footable-page"><a href="#">5</a></li>
-			                                        	<li class="footable-page-arrow"><a href="#next">›</a></li>
-			                                        	<li class="footable-page-arrow"><a href="#last">»</a></li>
-			                                        </ul>
+			                                        <ul id="pageHTML" class="pagination pull-right"></ul>
 			                                    </td>
 			                                </tr>
 		                                </tfoot>
@@ -151,14 +141,12 @@
     <script th:src="@{/js/plugins/footable/footable.all.min.js}"></script>
     
     <script th:inline="javascript">
-     
-        
-        var error = [[${test}]];
+		        
+        var pageHTML = [[${pageHTML}]];
 		$(document).ready(function () {
-			$("#test").html(error);
+			$("#pageHTML").html(pageHTML);
+			
 		});
-        
-        
         
     </script>
 
