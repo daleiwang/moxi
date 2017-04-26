@@ -10,7 +10,6 @@
 
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
-<link th:href="@{/css/animate.css}" rel="stylesheet" />
 <link th:href="@{/css/style.css}" rel="stylesheet" />
 
 <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet"/>
@@ -58,7 +57,7 @@
 		                    	<form action="newsCategoryManage_0_0_0">
 			                        <div class="row">
 		                            	<div class="col-sm-3 m-b-xs">
-		                            		<input name="name" value="" placeholder="分类名称" class="form-control" type="text"/>
+		                            		<input name="name" value="" th:value="${newsCategory.name}" placeholder="分类名称" class="form-control" type="text"/>
 		                                </div>
 		                                <div class="col-sm-1 m-b-xs">
 		                                    <button id="submitButton" class="btn btn-primary btn-block" type="submit"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;&nbsp;<strong>搜索</strong></button>

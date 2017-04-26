@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,7 +37,14 @@ public class NewsController {
 		model.addAttribute("list", list);
 		String pageHTML = PageUtil.getPageContent("newsCategoryManage_{pageCurrent}_{pageSize}_{pageCount}?name="+newsCategory.getName(), pageCurrent, pageSize, pageCount);
 		model.addAttribute("pageHTML",pageHTML);
+		model.addAttribute("newsCategory",newsCategory);
 		return "/news/newsCategoryManage";
+	}
+	
+	@GetMapping("newsCategoryEdit")
+	public String newsCategoryEdit(Model model,NewsCategory newsCategory) {
+		
+		return "/news/newsCategoryEdit";
 	}
 	
 	@RequestMapping("/newsManage_{pageSize}_{currentPage}")
