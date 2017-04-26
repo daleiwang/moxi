@@ -24,7 +24,7 @@ public interface NewsCategoryService {
 			"limit #{start},#{end}",
 		"</script>"
 	})
-	List<NewsCategory> list(NewsCategory newsCategory, int start, int end);
+	List<NewsCategory> list(NewsCategory newsCategory);
 	
 	@Select({
 		"<script>",
@@ -36,8 +36,6 @@ public interface NewsCategoryService {
 		"</script>"
 	})
 	int count(NewsCategory newsCategory);
-	
-	
 	
 	@Insert("INSERT INTO `moxi`.`news_category` (`id`, `name`, `description`, `image`, `addDate`, `state`) VALUES (null, #{name}, #{description}, #{image}, now(), 0);")
 	int insert(NewsCategory newsCategory);

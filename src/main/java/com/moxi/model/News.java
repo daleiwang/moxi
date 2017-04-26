@@ -2,7 +2,7 @@ package com.moxi.model;
 
 import java.sql.Date;
 
-public class News {
+public class News extends BaseObject {
 
 	private long id;
 	private String title;
@@ -14,13 +14,6 @@ public class News {
 	private Date updateDate;
 	private int commendState;
 	private int state;
-
-	@Override
-	public String toString() {
-		return "News [id=" + id + ", title=" + title + ", description=" + description + ", category=" + category
-				+ ", image=" + image + ", content=" + content + ", addDate=" + addDate + ", updateDate=" + updateDate
-				+ ", commendState=" + commendState + ", state=" + state + "]";
-	}
 
 	public long getId() {
 		return id;

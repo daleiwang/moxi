@@ -2,7 +2,7 @@ package com.moxi.model;
 
 import java.sql.Date;
 
-public class Admin {
+public class Admin extends BaseObject {
 
 	private long id;
 	private String userName;
@@ -14,14 +14,6 @@ public class Admin {
 	private Date addDate;
 	private Date updateDate;
 	private int state;
-
-	public String getRealName() {
-		return realName;
-	}
-
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
 
 	public long getId() {
 		return id;
@@ -45,6 +37,14 @@ public class Admin {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 	public int getAge() {
@@ -93,13 +93,6 @@ public class Admin {
 
 	public void setState(int state) {
 		this.state = state;
-	}
-
-	@Override
-	public String toString() {
-		return "Admin [id=" + id + ", userName=" + userName + ", password=" + password + ", age=" + age
-				+ ", phoneNumber=" + phoneNumber + ", headPicture=" + headPicture + ", addDate=" + addDate
-				+ ", updateDate=" + updateDate + ", state=" + state + "]";
 	}
 
 }

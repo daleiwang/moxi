@@ -1,11 +1,5 @@
 package com.moxi.service;
 
-public class NewsService {
+public interface NewsService {
 
-	
-	
-	
-	
-	
-	
 }
