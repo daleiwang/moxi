@@ -1,13 +1,23 @@
 package com.moxi.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.moxi.model.NewsCategory;
 import com.moxi.service.NewsCategoryService;
@@ -42,9 +52,44 @@ public class NewsController {
 	}
 	
 	@GetMapping("newsCategoryEdit")
-	public String newsCategoryEdit(Model model,NewsCategory newsCategory) {
-		
+	public String newsCategoryEditGet(Model model,NewsCategory newsCategory) {
+		if(newsCategory.getId()!=0){
+			NewsCategory newsCategoryT = newsCategoryService.findById(newsCategory);
+			model.addAttribute("newsCategory",newsCategoryT);
+		}
 		return "/news/newsCategoryEdit";
+	}
+	
+	@PostMapping("newsCategoryEdit")
+	public String newsCategoryEditPost(Model model,NewsCategory newsCategory, @RequestParam MultipartFile[] imageFile,HttpSession httpSession) {
+		System.out.println("xxxxxxxxxx");
+		for (MultipartFile file : imageFile) {
+			if (file.isEmpty()) {
+				System.out.println("文件未上传");
+			} else {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				Date date = new java.util.Date();
+				String strDate = sdf.format(date);
+				String fileName = strDate + file.getOriginalFilename().substring(
+								file.getOriginalFilename().indexOf("."),
+								file.getOriginalFilename().length());
+				String realPath = httpSession.getServletContext().getRealPath("/userfiles");
+				System.out.println("xxxxxxxxxx"+realPath);
+				try {
+					FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realPath, fileName));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		System.out.println("xxxxxxxxxx");
+		
+		if(newsCategory.getId()!=0){
+			newsCategoryService.update(newsCategory);
+		} else {
+			newsCategoryService.insert(newsCategory);
+		}
+		return "redirect:newsCategoryManage_0_0_0";
 	}
 	
 	@RequestMapping("/newsManage_{pageSize}_{currentPage}")

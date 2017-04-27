@@ -26,7 +26,7 @@
                         MOXI
                     </div>
                 </li>
-                <li class="active">
+                <li>
                     <a th:href="@{dashboard}"><i class="fa fa-diamond"></i> <span class="nav-label">仪表盘</span></a>
                 </li>
                 <li>
@@ -67,14 +67,13 @@
                         <li><a href="#">消息管理</a></li>
                     </ul>
                 </li>
-                <li>
+                <li id="news">
                     <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">内容管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="#">文章管理</a></li>
-                        <li><a href="#">文章分类</a></li>
-                        <li><a href="#">文章标签</a></li>
-                        <li><a href="#">广告位管理</a></li>
-                        <li><a href="#">广告管理</a></li>
+                        <li id="newsManage"><a th:href="@{newsManage_0_0_0}">文章管理</a></li>
+                        <li id="newsCategoryManage"><a th:href="@{newsCategoryManage_0_0_0}">文章分类</a></li>
+                        <li id=""><a href="#">广告位管理</a></li>
+                        <li id=""><a href="#">广告管理</a></li>
                     </ul>
                 </li>
                 <li>

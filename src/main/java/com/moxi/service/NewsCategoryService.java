@@ -21,7 +21,7 @@ public interface NewsCategoryService {
 			"<when test='name!=null'>",
 				"AND name LIKE CONCAT('%',#{name},'%')",
 			"</when>",
-			"limit #{start},#{end}",
+			"order by addDate desc limit #{start},#{end}",
 		"</script>"
 	})
 	List<NewsCategory> list(NewsCategory newsCategory);
