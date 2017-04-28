@@ -74,16 +74,15 @@ public class NewsController {
 								file.getOriginalFilename().indexOf("."),
 								file.getOriginalFilename().length());
 				String realPath = httpSession.getServletContext().getRealPath("/userfiles");
-				System.out.println("xxxxxxxxxx"+realPath);
+				System.out.println("realPath : "+realPath);
 				try {
 					FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realPath, fileName));
+					newsCategory.setImage("/userfiles/"+fileName);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		System.out.println("xxxxxxxxxx");
-		
 		if(newsCategory.getId()!=0){
 			newsCategoryService.update(newsCategory);
 		} else {

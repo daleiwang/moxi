@@ -62,13 +62,7 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		
-		<!--commons-fileupload  -->
-		<dependency>
-        	<groupId>commons-fileupload</groupId>
-        	<artifactId>commons-fileupload</artifactId>
-        	<version>1.2.2</version>
-   	 	</dependency>
-     	
+		<!--commons-io  -->
      	<dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
