@@ -1,6 +1,7 @@
 package com.moxi.controller;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +31,24 @@ public class NewsController {
 	@Autowired
 	private NewsCategoryService newsCategoryService;
 	
+	
+	@RequestMapping("/newsManage_{pageCurrent}_{pageSize}_{pageCount}")
+	public String newsManage(@PathVariable Integer pageCurrent,@PathVariable Integer pageSize,@PathVariable Integer pageCount, Model model) {
+		return "/news/newsManage";
+	}
+	
+	
+	
+	
+	/**
+	 * 文章分类列表
+	 * @param newsCategory
+	 * @param pageCurrent
+	 * @param pageSize
+	 * @param pageCount
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/newsCategoryManage_{pageCurrent}_{pageSize}_{pageCount}")
 	public String newsCategoryManage(NewsCategory newsCategory,@PathVariable Integer pageCurrent,@PathVariable Integer pageSize,@PathVariable Integer pageCount, Model model) {
 		//判断
@@ -51,6 +70,12 @@ public class NewsController {
 		return "/news/newsCategoryManage";
 	}
 	
+	/**
+	 * 文章分类新增、修改跳转
+	 * @param model
+	 * @param newsCategory
+	 * @return
+	 */
 	@GetMapping("newsCategoryEdit")
 	public String newsCategoryEditGet(Model model,NewsCategory newsCategory) {
 		if(newsCategory.getId()!=0){
@@ -60,9 +85,16 @@ public class NewsController {
 		return "/news/newsCategoryEdit";
 	}
 	
+	/**
+	 * 文章分类新增、修改提交
+	 * @param model
+	 * @param newsCategory
+	 * @param imageFile
+	 * @param httpSession
+	 * @return
+	 */
 	@PostMapping("newsCategoryEdit")
 	public String newsCategoryEditPost(Model model,NewsCategory newsCategory, @RequestParam MultipartFile[] imageFile,HttpSession httpSession) {
-		System.out.println("xxxxxxxxxx");
 		for (MultipartFile file : imageFile) {
 			if (file.isEmpty()) {
 				System.out.println("文件未上传");
@@ -91,8 +123,5 @@ public class NewsController {
 		return "redirect:newsCategoryManage_0_0_0";
 	}
 	
-	@RequestMapping("/newsManage_{pageSize}_{currentPage}")
-	public String newsManage(Model model, @PathVariable Integer pageSize, @PathVariable Integer currentPage) {
-		return "/news/newsManage";
-	}
+	
 }

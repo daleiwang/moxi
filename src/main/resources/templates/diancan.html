@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>MOXI</title>
+
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+<link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet" />
+<link th:href="@{/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css}" rel="stylesheet" />
+
+</head>
+
+<body>
+	<div class="row">
+           	<div class="wrapper wrapper-content animated fadeInRight">
+               	<div class="vote-item">
+                   	<div class="row">
+                    	<div class="col-md-3 col-sm-3 col-xs-3">
+                  			<img alt="image" class=" img-responsive" src="img/a2.jpg"/>
+                       	</div>
+                       	<div class="col-md-7 col-sm-7 col-xs-7">
+                       		<p  class="vote-title" style="margin-left: 0px;font-size: 16px;">
+                              	 JDMP
+                           	</p>
+                           	<h3 style="color:red">7<small>元</small></h3>	
+                       	</div>
+                   		<div class="col-md-2 col-sm-2 col-xs-2">
+                  			<button class="btn btn-info btn-circle btn-block" type="button"><i class="fa fa-plus" ></i></button>
+                       	</div>
+                   </div>
+               	</div>
+               	<div class="vote-item">
+                   <div class="row">
+                    	<div class="col-md-3 col-sm-3 col-xs-3">
+                  			<img alt="image" class=" img-responsive" src="img/a2.jpg"/>
+                       </div>
+                       <div class="col-md-7 col-sm-7 col-xs-7">
+                       	<p  class="vote-title" style="margin-left: 0px;font-size: 16px;">
+                              	 SKLM
+                           </p>
+                           <h3 style="color:red">7<small>元</small></h3>	
+                       </div>
+                   	<div class="col-md-2 col-sm-2 col-xs-2">
+                  				<button class="btn btn-info btn-circle btn-block" type="button"><i class="fa fa-plus" ></i></button>
+                       </div>
+                   </div>
+               	</div>
+               	<div class="vote-item">
+                   <div class="row">
+                    	<div class="col-md-3 col-sm-3 col-xs-3">
+                  			<img alt="image" class=" img-responsive" src="img/a2.jpg"/>
+                       </div>
+                       <div class="col-md-7 col-sm-7 col-xs-7">
+                       	<p  class="vote-title" style="margin-left: 0px;font-size: 16px;">
+                              	 WCMP
+                           </p>
+                           <h3 style="color:red">7<small>元</small></h3>	
+                       </div>
+                   	<div class="col-md-2 col-sm-2 col-xs-2">
+                  				<button class="btn btn-info btn-circle btn-block" type="button"><i class="fa fa-plus" ></i></button>
+                       </div>
+                   </div>
+               	</div>
+               	<div class="vote-item">
+                   <div class="row">
+                    	<div class="col-md-3 col-sm-3 col-xs-3">
+                  			<img alt="image" class=" img-responsive" src="img/a2.jpg"/>
+                       </div>
+                       <div class="col-md-7 col-sm-7 col-xs-7">
+                       	<p  class="vote-title" style="margin-left: 0px;font-size: 16px;">
+                           	CDJN
+                           </p>
+                           <h3 style="color:red">7<small>元</small></h3>	
+                       </div>
+                   	<div class="col-md-2 col-sm-2 col-xs-2">
+                  				<button class="btn btn-info btn-circle btn-block" type="button"><i class="fa fa-plus" ></i></button>
+                       </div>
+                   </div>
+               	</div>
+              	<div class="vote-item">
+                   <div class="row">
+                    	<div class="col-md-3 col-sm-3 col-xs-3">
+                  			<img alt="image" class=" img-responsive" src="img/a2.jpg"/>
+                       </div>
+                       <div class="col-md-7 col-sm-7 col-xs-7">
+                       	<p  class="vote-title" style="margin-left: 0px;font-size: 16px;">
+                              	RJM
+                           </p>
+                           <h3 style="color:red">7<small>元</small></h3>	
+                       </div>
+                   	<div class="col-md-2 col-sm-2 col-xs-2">
+                  				<button class="btn btn-info btn-circle btn-block" type="button"  data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" ></i></button>
+                       </div>
+                   </div>
+               	</div>
+           </div>
+       
+       
+       
+       <!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">加入购物车</h4>
+		      </div>
+		      	<div class="modal-body">
+		      			<h4>选择口味：</h4>
+		     			<button type="button" class="btn btn-outline btn-primary btn-sm">微微辣</button>
+		     			<button type="button" class="btn btn-outline btn-primary btn-sm">微辣</button>
+		     			<button type="button" class="btn btn-outline btn-primary btn-sm">中辣</button>
+		     			<button type="button" class="btn btn-outline btn-primary btn-sm">特辣</button>
+		     			<button type="button" class="btn btn-outline btn-primary btn-sm">不辣</button>
+		     			<div class="hr-line-dashed"></div>
+		     			<h4>请选择购买数量：</h4>
+		     			 <div class="input-group">
+					     	<span class="input-group-btn">
+					        	<button class="btn btn-primary" type="button">&nbsp;-&nbsp;</button>
+					      	</span>
+					      	<input type="text" class="form-control" value="1"/>
+					      	<span class="input-group-btn">
+					        	<button class="btn btn-primary" type="button">&nbsp;+&nbsp;</button>
+					      	</span>
+					    </div>
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		      	<button type="button" class="btn btn-primary">加入购物车</button>
+		     	</div>
+		    </div>
+		  </div>
+		</div>
+                 
+                    
+	   <nav class="navbar navbar-default ">
+			<div class="container" align="center">
+	     		<div class="row navbar-fixed-bottom" align="center">
+	        		<div class="col-md-6 col-sm-6 col-xs-6" align="center" style="padding-right: 0px;padding-left: 0px;">
+						<a class="btn btn-primary btn-block btn-lg" href="#" style="border-radius: 0px;">首页</a>
+					</div>
+	            	<div class="col-md-6 col-sm-6 col-xs-6" align="center" style="padding-right: 0px;padding-left: 0px;">
+						<a class="btn btn-default btn-block btn-lg" href="#" style="border-radius: 0px;">购物车<span class="badge">0</span></a>
+					</div>
+	     		</div>
+			</div>
+		</nav>
+	</div>
+	
+    <!-- Mainly scripts -->
+    <script th:src="@{/js/jquery-2.1.1.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+	
+    <!-- Custom and plugin javascript -->
+    <script th:src="@{/js/inspinia.js}"></script>
+    <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+    
+    <!-- iCheck -->
+    <script th:src="@{/js/plugins/iCheck/icheck.min.js}"></script>
+    
+	<script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+ 	</script>
+
+</body>
+
+</html>
