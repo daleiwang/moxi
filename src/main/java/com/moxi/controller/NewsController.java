@@ -37,9 +37,6 @@ public class NewsController {
 		return "/news/newsManage";
 	}
 	
-	
-	
-	
 	/**
 	 * 文章分类列表
 	 * @param newsCategory
