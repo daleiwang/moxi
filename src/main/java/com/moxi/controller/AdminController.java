@@ -7,28 +7,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.moxi.model.Admin;
 import com.moxi.service.AdminService;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
 
 	
 	@Autowired
 	private AdminService adminService;
 	
+	
+	/**************************************************************************************************************************************************************************
+	 * **************************************************************************************************************************************************************************
+	 *后台业务 
+	 * **************************************************************************************************************************************************************************
+	 ***************************************************************************************************************************************************************************/
+	
+	
 	/**
 	 * 登录跳转
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/login")
+	@GetMapping("/admin/login")
 	public String loginGet(Model model) {
 		model.addAttribute("projectName", "MOXI");
-		
 		return "login";
 	}
 	
@@ -39,7 +44,7 @@ public class AdminController {
 	 * @param httpSession
 	 * @return
 	 */
-	@PostMapping("/login")
+	@PostMapping("/admin/login")
 	public String loginPost(Admin admin,Model model,HttpSession httpSession) {
 		model.addAttribute("projectName", "MOXI");
 		Admin adminRes = adminService.findByNameAndPassword(admin);
@@ -57,7 +62,7 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/register")
+	@GetMapping("/admin/register")
 	public String register(Model model) {
 		model.addAttribute("projectName", "MOXI");
 		return "register";
@@ -68,7 +73,7 @@ public class AdminController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/dashboard")
+	@GetMapping("/admin/dashboard")
 	public String dashboard(Model model) {
 		return "dashboard";
 	}

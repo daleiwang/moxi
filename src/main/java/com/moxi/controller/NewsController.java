@@ -18,21 +18,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.moxi.model.NewsCategory;
+import com.moxi.model.ResObject;
 import com.moxi.service.NewsCategoryService;
+import com.moxi.util.Constant;
 import com.moxi.util.PageUtil;
 
 @Controller
-@RequestMapping("/admin")
 public class NewsController {
 
 	@Autowired
 	private NewsCategoryService newsCategoryService;
 	
+	/**************************************************************************************************************************************************************************
+	 * **************************************************************************************************************************************************************************
+	 *后台业务 
+	 * **************************************************************************************************************************************************************************
+	 ***************************************************************************************************************************************************************************/
 	
-	@RequestMapping("/newsManage_{pageCurrent}_{pageSize}_{pageCount}")
+	@RequestMapping("/admin/newsManage_{pageCurrent}_{pageSize}_{pageCount}")
 	public String newsManage(@PathVariable Integer pageCurrent,@PathVariable Integer pageSize,@PathVariable Integer pageCount, Model model) {
 		return "/news/newsManage";
 	}
@@ -46,7 +53,7 @@ public class NewsController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/newsCategoryManage_{pageCurrent}_{pageSize}_{pageCount}")
+	@RequestMapping("/admin/newsCategoryManage_{pageCurrent}_{pageSize}_{pageCount}")
 	public String newsCategoryManage(NewsCategory newsCategory,@PathVariable Integer pageCurrent,@PathVariable Integer pageSize,@PathVariable Integer pageCount, Model model) {
 		//判断
 		if(pageSize == 0) pageSize = 10;
@@ -73,7 +80,7 @@ public class NewsController {
 	 * @param newsCategory
 	 * @return
 	 */
-	@GetMapping("newsCategoryEdit")
+	@GetMapping("/admin/newsCategoryEdit")
 	public String newsCategoryEditGet(Model model,NewsCategory newsCategory) {
 		if(newsCategory.getId()!=0){
 			NewsCategory newsCategoryT = newsCategoryService.findById(newsCategory);
@@ -90,7 +97,7 @@ public class NewsController {
 	 * @param httpSession
 	 * @return
 	 */
-	@PostMapping("newsCategoryEdit")
+	@PostMapping("/admin/newsCategoryEdit")
 	public String newsCategoryEditPost(Model model,NewsCategory newsCategory, @RequestParam MultipartFile[] imageFile,HttpSession httpSession) {
 		for (MultipartFile file : imageFile) {
 			if (file.isEmpty()) {
@@ -121,4 +128,32 @@ public class NewsController {
 	}
 	
 	
+	/**************************************************************************************************************************************************************************
+	 * **************************************************************************************************************************************************************************
+	 *接口业务 
+	 * **************************************************************************************************************************************************************************
+	 ***************************************************************************************************************************************************************************/
+	
+	@ResponseBody
+	@RequestMapping("/newsCategoryManage")
+	public ResObject<NewsCategory> newsCategoryManage(NewsCategory newsCategory) {
+		int pageSize = newsCategory.getPageSize();
+		int pageCurrent = newsCategory.getPageCurrent();
+		int pageCount = newsCategory.getPageCount();
+		//判断
+		if(pageSize == 0) pageSize = 10;
+		if(pageCurrent == 0) pageCurrent = 1;
+		int rows = newsCategoryService.count(newsCategory);
+		if(pageCount == 0) pageCount = rows%pageSize == 0 ? (rows/pageSize) : (rows/pageSize) + 1;
+		
+		//查询
+		newsCategory.setStart((pageCurrent - 1)*pageSize);
+		newsCategory.setEnd(pageSize);
+		List<NewsCategory> list = newsCategoryService.list(newsCategory);
+		
+		ResObject<NewsCategory> res = new ResObject<NewsCategory>(Constant.Code01, Constant.Msg01, list);
+		
+		//输出
+		return res;
+	}
 }
