@@ -41,7 +41,7 @@ public class NewsController {
 	
 	@RequestMapping("/admin/newsManage_{pageCurrent}_{pageSize}_{pageCount}")
 	public String newsManage(@PathVariable Integer pageCurrent,@PathVariable Integer pageSize,@PathVariable Integer pageCount, Model model) {
-		return "/news/newsManage";
+		return "news/newsManage";
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class NewsController {
 		String pageHTML = PageUtil.getPageContent("newsCategoryManage_{pageCurrent}_{pageSize}_{pageCount}?name="+newsCategory.getName(), pageCurrent, pageSize, pageCount);
 		model.addAttribute("pageHTML",pageHTML);
 		model.addAttribute("newsCategory",newsCategory);
-		return "/news/newsCategoryManage";
+		return "news/newsCategoryManage";
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class NewsController {
 			NewsCategory newsCategoryT = newsCategoryService.findById(newsCategory);
 			model.addAttribute("newsCategory",newsCategoryT);
 		}
-		return "/news/newsCategoryEdit";
+		return "news/newsCategoryEdit";
 	}
 	
 	/**
