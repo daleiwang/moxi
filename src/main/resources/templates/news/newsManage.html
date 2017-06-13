@@ -10,7 +10,6 @@
 
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
-<link th:href="@{/css/animate.css}" rel="stylesheet" />
 <link th:href="@{/css/style.css}" rel="stylesheet" />
 
 <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet"/>
@@ -42,6 +41,7 @@
 		      	<div class="col-lg-2">
 		      	</div>
 		  	</div>
+		  	
         	<div class="wrapper wrapper-content animated fadeInRight">
             	<div class="row">
 	            	<div class="col-lg-12">
@@ -57,21 +57,18 @@
 		                    <div class="ibox-content" style="display: block;">
 		                        <div class="row">
 	                            	<div class="col-sm-3 m-b-xs">
-	                            		<input id="product_name" name="product_name" value="" placeholder="标题" class="form-control" type="text"/>
+	                            		<input id="product_name" name="product_name" value="" placeholder="文章标题" class="form-control" type="text"/>
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
 	                                    <select name="status" id="status" class="form-control">
-	                                    	<option value="">请选择分类</option>
+	                                    	<option value="">文章分类</option>
                                             <option value="1">Completed</option>
                                             <option value="0">Pending</option>
                                         </select>
 	                                </div>
-	                                <div class="col-sm-3 m-b-xs">
-	                                    <input id="quantity" name="quantity" value="" placeholder="标签" class="form-control" type="text"/>
-	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
 	                                    <select name="status" id="status" class="form-control">
-	                                    	<option value="">请选择状态</option>
+	                                    	<option value="">推荐状态</option>
                                             <option value="1">Completed</option>
                                             <option value="0">Pending</option>
                                         </select>
@@ -82,10 +79,7 @@
 	                            </div>
 	                            <div class="row">
 		                            <div class="col-sm-6 m-b-xs">
-					                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Refresh inbox"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;新增文章&nbsp;&nbsp;&nbsp;&nbsp;</button>
-					                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Move to trash"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;批量删除&nbsp;&nbsp;&nbsp;&nbsp;</button>
-					                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as read"><i class="fa fa-star"></i>&nbsp;&nbsp;&nbsp;&nbsp;批量推荐&nbsp;&nbsp;&nbsp;&nbsp;</button>
-					                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as read"><i class="fa fa-star-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;批量取消推荐</button>
+					                    <a th:href="@{newsEdit}" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Refresh inbox"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;新增文章&nbsp;&nbsp;&nbsp;&nbsp;</a>
 					                </div>
 					                <div class="col-sm-6 m-b-xs">
 	                             	</div>
@@ -104,7 +98,6 @@
 	                            </div>
 	                        </div>
 	                        <div class="ibox-content">
-		                        
 	                            <div class="table-responsive">
 	                                <table class=" table table-hover" data-page-size="10">
 	                                    <thead>
@@ -250,17 +243,11 @@
 	<!-- FooTable -->
     <script th:src="@{/js/plugins/footable/footable.all.min.js}"></script>
     
+    <!-- common -->
+    <script th:src="@{/js/common.js}"></script>
+    
     <script>
-        $(document).ready(function(){
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-        });
-        $(document).ready(function() {
-            $('.footable').footable();
-
-        });
+        
     </script>
 
 </body>
