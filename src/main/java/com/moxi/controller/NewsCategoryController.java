@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,52 +19,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.moxi.model.News;
 import com.moxi.model.NewsCategory;
 import com.moxi.service.NewsCategoryService;
-import com.moxi.service.NewsService;
 import com.moxi.util.PageUtil;
 
 @Controller
-public class NewsController {
-
-	@Autowired
-	private NewsService newsService;
+public class NewsCategoryController {
 
 	@Autowired
 	private NewsCategoryService newsCategoryService;
 	
-	
-	@RequestMapping("/admin/newsManage_{pageCurrent}_{pageSize}_{pageCount}")
-	public String newsManage(News news,@PathVariable Integer pageCurrent,@PathVariable Integer pageSize,@PathVariable Integer pageCount, Model model) {
-		
+	/**
+	 * 文章分类列表
+	 * @param newsCategory
+	 * @param pageCurrent
+	 * @param pageSize
+	 * @param pageCount
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/admin/newsCategoryManage_{pageCurrent}_{pageSize}_{pageCount}")
+	public String newsCategoryManage(NewsCategory newsCategory,@PathVariable Integer pageCurrent,@PathVariable Integer pageSize,@PathVariable Integer pageCount, Model model) {
 		//判断
 		if(pageSize == 0) pageSize = 10;
 		if(pageCurrent == 0) pageCurrent = 1;
-		int rows = newsService.count(news);
+		int rows = newsCategoryService.count(newsCategory);
 		if(pageCount == 0) pageCount = rows%pageSize == 0 ? (rows/pageSize) : (rows/pageSize) + 1;
 		
 		//查询
-		news.setStart((pageCurrent - 1)*pageSize);
-		news.setEnd(pageSize);
-		List<News> newsList = newsService.list(news);
-		
-		//文章分类
-		NewsCategory newsCategory = new NewsCategory();
-		newsCategory.setStart(0);
-		newsCategory.setEnd(Integer.MAX_VALUE);
-		List<NewsCategory> newsCategoryList = newsCategoryService.list(newsCategory);
+		newsCategory.setStart((pageCurrent - 1)*pageSize);
+		newsCategory.setEnd(pageSize);
+		List<NewsCategory> list = newsCategoryService.list(newsCategory);
 		
 		//输出
-		model.addAttribute("newsCategoryList", newsCategoryList);
-		model.addAttribute("newsList", newsList);
-		String pageHTML = PageUtil.getPageContent("newsManage_{pageCurrent}_{pageSize}_{pageCount}?title="+news.getTitle(), pageCurrent, pageSize, pageCount);
+		model.addAttribute("list", list);
+		String pageHTML = PageUtil.getPageContent("newsCategoryManage_{pageCurrent}_{pageSize}_{pageCount}?name="+newsCategory.getName(), pageCurrent, pageSize, pageCount);
 		model.addAttribute("pageHTML",pageHTML);
-		model.addAttribute("news",news);
-		
-		return "news/newsManage";
+		model.addAttribute("newsCategory",newsCategory);
+		return "news/newsCategoryManage";
 	}
-	
 	
 	/**
 	 * 文章分类新增、修改跳转
@@ -73,13 +65,13 @@ public class NewsController {
 	 * @param newsCategory
 	 * @return
 	 */
-	@GetMapping("/admin/newsEdit")
-	public String newsEditGet(Model model,News news) {
-		if(news.getId()!=0){
-//			News newsT = newsCategoryService.findById(newsCategory);
-//			model.addAttribute("newsCategory",newsCategoryT);
+	@GetMapping("/admin/newsCategoryEdit")
+	public String newsCategoryEditGet(Model model,NewsCategory newsCategory) {
+		if(newsCategory.getId()!=0){
+			NewsCategory newsCategoryT = newsCategoryService.findById(newsCategory);
+			model.addAttribute("newsCategory",newsCategoryT);
 		}
-		return "news/newsEdit";
+		return "news/newsCategoryEdit";
 	}
 	
 	/**
@@ -90,33 +82,34 @@ public class NewsController {
 	 * @param httpSession
 	 * @return
 	 */
-	@PostMapping("/admin/newsEdit")
-	public String newsEditPost(Model model,News news, @RequestParam MultipartFile[] imageFile,HttpSession httpSession) {
+	@PostMapping("/admin/newsCategoryEdit")
+	public String newsCategoryEditPost(Model model,NewsCategory newsCategory, @RequestParam MultipartFile[] imageFile,HttpSession httpSession) {
 		for (MultipartFile file : imageFile) {
 			if (file.isEmpty()) {
 				System.out.println("文件未上传");
 			} else {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-				Random random = new Random();
 				Date date = new java.util.Date();
 				String strDate = sdf.format(date);
-				String fileName = strDate + "_" + random.nextInt(1000) + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."),file.getOriginalFilename().length());
+				String fileName = strDate + file.getOriginalFilename().substring(
+								file.getOriginalFilename().indexOf("."),
+								file.getOriginalFilename().length());
 				String realPath = httpSession.getServletContext().getRealPath("/userfiles");
 				System.out.println("realPath : "+realPath);
 				try {
 					FileUtils.copyInputStreamToFile(file.getInputStream(),new File(realPath, fileName));
-					news.setImage("/userfiles/"+fileName);
+					newsCategory.setImage("/userfiles/"+fileName);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		if(news.getId()!=0){
-//			newsCategoryService.update(newsCategory);
+		if(newsCategory.getId()!=0){
+			newsCategoryService.update(newsCategory);
 		} else {
-			newsService.insert(news);
+			newsCategoryService.insert(newsCategory);
 		}
-		return "redirect:newsManage_0_0_0";
+		return "redirect:newsCategoryManage_0_0_0";
 	}
-	
+
 }

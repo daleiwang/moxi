@@ -66,27 +66,27 @@
                             	<input type="hidden" name="id" th:value="${newsCategory.id}" />
                             	<input type="hidden" name="image" th:value="${newsCategory.image}" />
                             	
-                                <div class="form-group"><label class="col-sm-2 control-label">分类名称：</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">名称：</label>
                                     <div class="col-sm-10">
                                     	<input id="name" name="name" type="text" class="form-control" th:value="${newsCategory.name}"/>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-                                <div class="form-group"><label class="col-sm-2 control-label">分类描述：</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">描述：</label>
                                     <div class="col-sm-10">
                                     	<textarea id="description" name="description" class="form-control" rows="2" th:text="${newsCategory.description}"></textarea>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
                                 
-                                <div id="imageCell" class="form-group"><label class="col-sm-2 control-label">分类图片：</label>
+                                <div id="imageCell" class="form-group"><label class="col-sm-2 control-label">图片：</label>
                                     <div class="col-sm-10">
                                     	<img  th:src="@{${newsCategory.image}}" />
                                     	<button id="imageCellBut" type="button" class="btn btn-white btn-sm">&nbsp;&nbsp;&nbsp;&nbsp;修改&nbsp;&nbsp;&nbsp;&nbsp;</button>
                                     </div>
                                 </div>
                                 
-                                <div id="imputCell" class="form-group"><label class="col-sm-2 control-label">分类图片：</label>
+                                <div id="imputCell" class="form-group"><label class="col-sm-2 control-label">图片：</label>
                                     <div class="col-sm-10">
                                     	<input id="imageFile" name="imageFile" type="file" />
                                     </div>

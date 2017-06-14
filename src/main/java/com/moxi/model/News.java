@@ -8,12 +8,30 @@ public class News extends BaseObject {
 	private String title;
 	private String description;
 	private long category;
+	private String categoryName;
+	private String categoryImage;
 	private String image;
 	private String content;
 	private Date addDate;
 	private Date updateDate;
 	private int commendState;
 	private int state;
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getCategoryImage() {
+		return categoryImage;
+	}
+
+	public void setCategoryImage(String categoryImage) {
+		this.categoryImage = categoryImage;
+	}
 
 	public long getId() {
 		return id;
