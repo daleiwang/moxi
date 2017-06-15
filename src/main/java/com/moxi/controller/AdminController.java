@@ -14,41 +14,32 @@ import com.moxi.service.AdminService;
 @Controller
 public class AdminController {
 
-	
 	@Autowired
 	private AdminService adminService;
-	
-	
-	/**************************************************************************************************************************************************************************
-	 * **************************************************************************************************************************************************************************
-	 *后台业务 
-	 * **************************************************************************************************************************************************************************
-	 ***************************************************************************************************************************************************************************/
-	
-	
+
 	/**
 	 * 登录跳转
+	 * 
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("/admin/login")
 	public String loginGet(Model model) {
-		model.addAttribute("projectName", "MOXI");
 		return "login";
 	}
-	
+
 	/**
 	 * 登录
+	 * 
 	 * @param admin
 	 * @param model
 	 * @param httpSession
 	 * @return
 	 */
 	@PostMapping("/admin/login")
-	public String loginPost(Admin admin,Model model,HttpSession httpSession) {
-		model.addAttribute("projectName", "MOXI");
+	public String loginPost(Admin admin, Model model, HttpSession httpSession) {
 		Admin adminRes = adminService.findByNameAndPassword(admin);
-		if(adminRes != null){
+		if (adminRes != null) {
 			httpSession.setAttribute("admin", adminRes);
 			return "redirect:dashboard";
 		} else {
@@ -56,20 +47,21 @@ public class AdminController {
 			return "login";
 		}
 	}
-	
+
 	/**
 	 * 注册
+	 * 
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("/admin/register")
 	public String register(Model model) {
-		model.addAttribute("projectName", "MOXI");
 		return "register";
 	}
-	
+
 	/**
 	 * 仪表板页面
+	 * 
 	 * @param model
 	 * @return
 	 */

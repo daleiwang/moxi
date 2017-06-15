@@ -61,7 +61,7 @@ public class NewsController {
 		//输出
 		model.addAttribute("newsCategoryList", newsCategoryList);
 		model.addAttribute("newsList", newsList);
-		String pageHTML = PageUtil.getPageContent("newsManage_{pageCurrent}_{pageSize}_{pageCount}?title="+news.getTitle(), pageCurrent, pageSize, pageCount);
+		String pageHTML = PageUtil.getPageContent("newsManage_{pageCurrent}_{pageSize}_{pageCount}?title="+news.getTitle()+"&category="+news.getCategory()+"&commendState="+news.getCommendState()+"&orderBy="+news.getOrderBy(), pageCurrent, pageSize, pageCount);
 		model.addAttribute("pageHTML",pageHTML);
 		model.addAttribute("news",news);
 		

@@ -58,29 +58,29 @@
 		                    	<form action="newsManage_0_0_0">
 		                        <div class="row">
 	                            	<div class="col-sm-3 m-b-xs">
-	                            		<input id="title" name="title" th:value="${news.title}" placeholder="文章标题" class="form-control" type="text"/>
+	                            		<input id="title" name="title" placeholder="文章标题" class="form-control" type="text" th:value="${news.title}"/>
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
-	                                    <select name="category" id="category" class="form-control">
-	                                    	<option value="0">--文章分类--</option>
-                                            <option th:each="nc : ${newsCategoryList}" th:value="${nc.id}" th:text="${nc.name}">Pending</option>
+	                                    <select name="category" id="category" class="form-control" >
+	                                    	<option value="0" th:selected="${news.category==0}">--请选择文章分类--</option>
+                                            <option th:each="nc : ${newsCategoryList}" th:value="${nc.id}" th:text="${nc.name}" th:selected="${nc.id==news.category}">分类</option>
                                         </select>
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
 	                                    <select name="commendState" id="commendState" class="form-control">
-	                                    	<option value="0">--推荐状态--</option>
-	                                    	<option value="1">正常</option>
-	                                    	<option value="2">推荐</option>
+	                                    	<option value="0" th:selected="${news.commendState==0}">--请选择推荐状态--</option>
+	                                    	<option value="1" th:selected="${news.commendState==1}">正常</option>
+	                                    	<option value="2" th:selected="${news.commendState==2}">推荐</option>
                                         </select>
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
 	                                    <select name="orderBy" id="orderBy" class="form-control">
-	                                    	<option value="ADDDATE DESC">时间倒叙</option>
-	                                    	<option value="SCORE DESC">综合热度</option>
-	                                    	<option value="COMMENTS DESC">评论数</option>
-	                                    	<option value="BROWSES DESC">浏览数</option>
-	                                    	<option value="LIKES DESC">点赞数</option>
-	                                    	<option value="ADDDATE ASC">时间正序</option>
+	                                    	<option value="ADDDATE DESC" th:selected="${news.orderBy=='ADDDATE DESC'}">时间倒序</option>
+	                                    	<option value="SCORE DESC" th:selected="${news.orderBy=='SCORE DESC'}">综合热度</option>
+	                                    	<option value="COMMENTS DESC" th:selected="${news.orderBy=='COMMENTS DESC'}">评论数</option>
+	                                    	<option value="BROWSES DESC" th:selected="${news.orderBy=='BROWSES DESC'}">浏览数</option>
+	                                    	<option value="LIKES DESC" th:selected="${news.orderBy=='LIKES DESC'}">点赞数</option>
+	                                    	<option value="ADDDATE ASC" th:selected="${news.orderBy=='ADDDATE ASC'}">时间正序</option>
                                         </select>
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
