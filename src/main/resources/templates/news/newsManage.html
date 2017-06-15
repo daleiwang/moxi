@@ -62,25 +62,25 @@
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
 	                                    <select name="category" id="category" class="form-control">
-	                                    	<option value="0">文章分类</option>
+	                                    	<option value="0">--文章分类--</option>
                                             <option th:each="nc : ${newsCategoryList}" th:value="${nc.id}" th:text="${nc.name}">Pending</option>
                                         </select>
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
 	                                    <select name="commendState" id="commendState" class="form-control">
-	                                    	<option value="0">推荐状态</option>
+	                                    	<option value="0">--推荐状态--</option>
 	                                    	<option value="1">正常</option>
 	                                    	<option value="2">推荐</option>
                                         </select>
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
-	                                    <select name="order" id="order" class="form-control">
-	                                    	<option value="">排序</option>
-	                                    	<option value="">综合</option>
-	                                    	<option value="">评论数</option>
-	                                    	<option value="">点赞数</option>
-	                                    	<option value="">时间正序</option>
-	                                    	<option value="">时间倒叙</option>
+	                                    <select name="orderBy" id="orderBy" class="form-control">
+	                                    	<option value="ADDDATE DESC">时间倒叙</option>
+	                                    	<option value="SCORE DESC">综合热度</option>
+	                                    	<option value="COMMENTS DESC">评论数</option>
+	                                    	<option value="BROWSES DESC">浏览数</option>
+	                                    	<option value="LIKES DESC">点赞数</option>
+	                                    	<option value="ADDDATE ASC">时间正序</option>
                                         </select>
 	                                </div>
 	                                <div class="col-sm-2 m-b-xs">
@@ -129,7 +129,7 @@
 										      	<td th:text="${news.categoryName}">Onions</td>
 										      	<td th:text="${news.addDate}">Onions</td>
 										      	<td>
-										      		<a th:href="@{'newsEdit?id='+${news.id}}" title="修改"><i class="" th:class="${news.commendState} == 1? 'fa fa-arrow-up text-danger' : 'fa fa-arrow-down text-navy'"></i></a>
+										      		<a th:href="@{'newsEdit?id='+${news.id}}" title="修改"><i class="" th:class="${news.commendState} == 2? 'fa fa-arrow-up text-danger' : 'fa fa-arrow-down text-navy'"></i></a>
 										      	</td>
 										      	<td>
 										      		<a th:href="@{'newsEdit?id='+${news.id}}" title="修改"><i class="fa fa-edit text-navy"></i></a>

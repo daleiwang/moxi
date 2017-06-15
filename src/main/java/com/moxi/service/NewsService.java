@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.moxi.model.News;
+import com.moxi.util.Constant;
 
 @Mapper
 public interface NewsService {
@@ -28,11 +29,28 @@ public interface NewsService {
 			"<when test='commendState!=0'>",
 				"AND commendState = #{commendState}",
 			"</when>",
+			"<when test='orderBy==\""+Constant.OrderByAddDateAsc+"\"'>",
+				"order by "+Constant.OrderByAddDateAsc+",addDate desc",
+			"</when>",
+			"<when test='orderBy==\""+Constant.OrderByAddDateDesc+"\"'>",
+				"order by "+Constant.OrderByAddDateDesc,
+			"</when>",
+			"<when test='orderBy==\""+Constant.OrderByBrowsesDesc+"\"'>",
+				"order by "+Constant.OrderByBrowsesDesc+",addDate desc",
+			"</when>",
+			"<when test='orderBy==\""+Constant.OrderByCommentsDesc+"\"'>",
+				"order by "+Constant.OrderByCommentsDesc+",addDate desc",
+			"</when>",
+			"<when test='orderBy==\""+Constant.OrderByLikesDesc+"\"'>",
+				"order by "+Constant.OrderByLikesDesc+",addDate desc",
+			"</when>",
+			"<when test='orderBy==\""+Constant.OrderByScoreDesc+"\"'>",
+				"order by "+Constant.OrderByScoreDesc+",addDate desc",
+			"</when>",
 			"limit #{start},#{end}",
 		"</script>"
 	})
 	List<News> list(News news);
-	
 	
 	@Select({
 		"<script>",
@@ -42,11 +60,12 @@ public interface NewsService {
 			"<when test='title!=null'>",
 				"AND N.TITLE LIKE CONCAT('%',#{title},'%')",
 			"</when>",
+			"<when test='commendState!=0'>",
+				"AND commendState = #{commendState}",
+			"</when>",
 		"</script>"
 	})
 	int count(News news);
-	
-	
 	
 	@Insert("INSERT INTO `moxi`.`news` (`id`,`title`,`description`,`category`,`image`,`content`,`addDate`,`updateDate`,`commendState`,`state`,`browses`,`likes`,`comments`,`score`) VALUES (null,#{title},#{description},#{category},#{image},#{content},now(),now(),1,0,0,0,0,0);")
 	int insert(News news);

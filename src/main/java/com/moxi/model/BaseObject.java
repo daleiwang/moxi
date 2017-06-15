@@ -7,6 +7,16 @@ public class BaseObject {
 	private int pageCurrent;
 	private int pageSize;
 	private int pageCount;
+	private String orderBy;
+	
+	
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
 
 	public int getPageCurrent() {
 		return pageCurrent;

@@ -24,6 +24,7 @@ import com.moxi.model.News;
 import com.moxi.model.NewsCategory;
 import com.moxi.service.NewsCategoryService;
 import com.moxi.service.NewsService;
+import com.moxi.util.Constant;
 import com.moxi.util.PageUtil;
 
 @Controller
@@ -48,6 +49,7 @@ public class NewsController {
 		//查询
 		news.setStart((pageCurrent - 1)*pageSize);
 		news.setEnd(pageSize);
+		if(news.getOrderBy()==null){news.setOrderBy(Constant.OrderByAddDateDesc);}
 		List<News> newsList = newsService.list(news);
 		
 		//文章分类
