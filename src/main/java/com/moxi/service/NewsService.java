@@ -5,10 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.moxi.model.News;
 import com.moxi.util.Constant;
-
+	
 @Mapper
 public interface NewsService {
 	
@@ -60,6 +61,9 @@ public interface NewsService {
 			"<when test='title!=null'>",
 				"AND N.TITLE LIKE CONCAT('%',#{title},'%')",
 			"</when>",
+			"<when test='category!=0'>",
+				"AND category = #{category}",
+			"</when>",
 			"<when test='commendState!=0'>",
 				"AND commendState = #{commendState}",
 			"</when>",
@@ -69,5 +73,11 @@ public interface NewsService {
 	
 	@Insert("INSERT INTO `moxi`.`news` (`id`,`title`,`description`,`category`,`image`,`content`,`addDate`,`updateDate`,`commendState`,`state`,`browses`,`likes`,`comments`,`score`) VALUES (null,#{title},#{description},#{category},#{image},#{content},now(),now(),1,0,0,0,0,0);")
 	int insert(News news);
+
+	@Update("UPDATE `moxi`.`news` SET `title` = #{title}, `description` = #{description}, `category` = #{category}, `image` = #{image}, `content` = #{content}, `updateDate` = now()  WHERE `id` = #{id};")
+	int update(News news);
+	
+	@Update("UPDATE `moxi`.`news` SET `state` = #{state}, `commendState` = #{commendState}, `browses` = #{browses}, `likes` = #{likes}, `comments` = #{comments}, `score` = #{score} WHERE `id` = #{id};")
+	int updateState(News news);
 	
 }

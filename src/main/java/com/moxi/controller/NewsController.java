@@ -70,22 +70,27 @@ public class NewsController {
 	
 	
 	/**
-	 * 文章分类新增、修改跳转
+	 * 文章新增、修改跳转
 	 * @param model
 	 * @param newsCategory
 	 * @return
 	 */
 	@GetMapping("/admin/newsEdit")
 	public String newsEditGet(Model model,News news) {
+		NewsCategory newsCategory = new NewsCategory();
+		newsCategory.setStart(0);
+		newsCategory.setEnd(Integer.MAX_VALUE);
+		List<NewsCategory> newsCategoryList = newsCategoryService.list(newsCategory);
+		model.addAttribute("newsCategoryList",newsCategoryList);
 		if(news.getId()!=0){
-//			News newsT = newsCategoryService.findById(newsCategory);
-//			model.addAttribute("newsCategory",newsCategoryT);
+			News newT = newsService.findById(news);
+			model.addAttribute("news",newT);
 		}
 		return "news/newsEdit";
 	}
 	
 	/**
-	 * 文章分类新增、修改提交
+	 * 文章新增、修改提交
 	 * @param model
 	 * @param newsCategory
 	 * @param imageFile
@@ -114,7 +119,7 @@ public class NewsController {
 			}
 		}
 		if(news.getId()!=0){
-//			newsCategoryService.update(newsCategory);
+			newsService.update(news);
 		} else {
 			newsService.insert(news);
 		}

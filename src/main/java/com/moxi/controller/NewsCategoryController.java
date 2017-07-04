@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.moxi.model.NewsCategory;
+import com.moxi.model.ResObject;
 import com.moxi.service.NewsCategoryService;
+import com.moxi.util.Constant;
 import com.moxi.util.PageUtil;
 
 @Controller
@@ -111,5 +114,14 @@ public class NewsCategoryController {
 		}
 		return "redirect:newsCategoryManage_0_0_0";
 	}
-
+	
+	@ResponseBody
+	@PostMapping("/admin/newsCategoryEditState")
+	public ResObject<Object> register(NewsCategory newsCategory) {
+		int i = newsCategoryService.updateState(newsCategory);
+		System.out.println("i="+i);
+		ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
+		return object;
+	}
+	
 }

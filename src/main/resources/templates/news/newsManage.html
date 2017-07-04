@@ -184,12 +184,29 @@
     <script th:src="@{/js/common.js}"></script>
     
     <script th:inline="javascript">
-		        
-        var pageHTML = [[${pageHTML}]];
+	    var pageHTML = [[${pageHTML}]];
 		$(document).ready(function () {
 			$("#pageHTML").html(pageHTML);
 		});
+	
+    	/*<![CDATA[*/
         
+		function updateState(id,state){
+			if(confirm("确定删除此条信息?")){
+		 		$.ajax({
+		      		type: "POST",
+		           	url: "newsCategoryEditState?id="+id+"&state="+state,
+		           	contentType: "application/json; charset=utf-8",
+		        	success: function(msg){
+		        		 window.location.reload();
+		       		},
+		     		error: function(){
+		     			alert("对不起，信息加载失败！");
+		       		}
+				});
+			}
+		}
+		/*]]>*/
     </script>
 
 </body>
