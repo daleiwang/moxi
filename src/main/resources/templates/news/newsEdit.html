@@ -10,7 +10,13 @@
 
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+
+<!-- Toastr style -->
+<link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet"/>
+
 <link th:href="@{/css/style.css}" rel="stylesheet" />
+
+<!-- summernote style -->
 <link th:href="@{/css/plugins/summernote/summernote.css}" rel="stylesheet" />
 <link th:href="@{/css/plugins/summernote/summernote-bs3.css}" rel="stylesheet" />
 
@@ -136,15 +142,21 @@
     <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
     <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
 	
+    <!-- Peity -->
+    <script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+    
     <!-- Custom and plugin javascript -->
     <script th:src="@{/js/inspinia.js}"></script>
     <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
     
-    <!-- SUMMERNOTE -->
-    <script th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
+    <!-- Toastr script -->
+    <script th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
     
     <!-- common -->
     <script th:src="@{/js/common.js}"></script>
+    
+    <!-- SUMMERNOTE -->
+    <script th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
     
     <script th:inline="javascript">
         var image = [[${news.image}]];
@@ -164,9 +176,7 @@
     </script>
     
     <script th:inline="javascript">
-    	
     	var content = [[${news.content}]];
-    
 		$(document).ready(function () {
 			//初始化编辑器
 			$('#summernote').summernote({
@@ -178,12 +188,24 @@
 			      theme: 'monokai'
 			    }
 			});
-		
+			//编辑器赋值
 			$('#summernote').code(content);
 			
 			//提交
 			$("#submitButton").click(function(){
+				if($("#title").val() == ""){
+					toastr.error('请输入文章标题','提示');
+					return;
+				}
+				if($("#category").val() == 0){
+					toastr.error('请选择文章分类','提示');
+					return;
+				}
 				var markupStr =  $('#summernote').code();
+				if(markupStr == ""){
+					toastr.error('请填写文章内容','提示');
+					return;
+				}
 				$("#content").val(markupStr);
 				$("#formTag").submit();
 			});

@@ -129,14 +129,12 @@
 										      	<td th:text="${news.categoryName}">Onions</td>
 										      	<td th:text="${news.addDate}">Onions</td>
 										      	<td>
-										      		<a th:href="@{'newsEdit?id='+${news.id}}" title="修改"><i class="" th:class="${news.commendState} == 2? 'fa fa-arrow-up text-danger' : 'fa fa-arrow-down text-navy'"></i></a>
+										      		<a href="#" th:onclick="'javascript:updateState('+${news.id}+',0,2);'" title="状态"><i class="" th:class="${news.commendState} == 2? 'fa fa-arrow-up text-danger' : 'fa fa-arrow-down text-navy'"></i></a>
 										      	</td>
 										      	<td>
 										      		<a th:href="@{'newsEdit?id='+${news.id}}" title="修改"><i class="fa fa-edit text-navy"></i></a>
-										      		
 										      		&nbsp;&nbsp;&nbsp;&nbsp;
-										      		
-										      		<a th:href="@{'newsEdit?id='+${news.id}}" title="修改"><i class="fa fa-trash-o text-navy"></i></a>
+										      		<a href="#" th:onclick="'javascript:updateState('+${news.id}+',2,0);'" title="删除"><i class="fa fa-trash-o text-navy"></i></a>
 										      	</td>
 											</tr>
 	                                    </tbody>
@@ -182,7 +180,7 @@
     
     <!-- common -->
     <script th:src="@{/js/common.js}"></script>
-    
+
     <script th:inline="javascript">
 	    var pageHTML = [[${pageHTML}]];
 		$(document).ready(function () {
@@ -190,18 +188,23 @@
 		});
 	
     	/*<![CDATA[*/
-        
-		function updateState(id,state){
-			if(confirm("确定删除此条信息?")){
+		function updateState(id,state,commendState){
+    		var deleteTag;
+    		if(state==2){
+    			deleteTag = confirm("确定删除此条信息?");
+    		} else {
+    			deleteTag = true;
+    		}
+			if(deleteTag){
 		 		$.ajax({
 		      		type: "POST",
-		           	url: "newsCategoryEditState?id="+id+"&state="+state,
+		           	url: "newsEditState?id="+id+"&state="+state+"&commendState="+commendState,
 		           	contentType: "application/json; charset=utf-8",
 		        	success: function(msg){
 		        		 window.location.reload();
 		       		},
 		     		error: function(){
-		     			alert("对不起，信息加载失败！");
+		     			alert("系统异常！");
 		       		}
 				});
 			}

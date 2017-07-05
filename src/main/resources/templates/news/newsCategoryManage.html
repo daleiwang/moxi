@@ -105,7 +105,7 @@
 										      	<td>
 										      		<a th:href="@{'newsCategoryEdit?id='+${nc.id}}" title="修改"><i class="fa fa-edit text-navy"></i></a>
 										      		&nbsp;&nbsp;&nbsp;&nbsp;
-										      		<a href="#" th:onclick="'javascript:updateState('+${nc.id}+',1);'" title="删除"><i class="fa fa-trash-o text-navy"></i></a>
+										      		<a href="#" th:onclick="'javascript:updateState('+${nc.id}+',2);'" title="删除"><i class="fa fa-trash-o text-navy"></i></a>
 										      	</td>
 											</tr>
 	                                    </tbody>
@@ -171,7 +171,7 @@
 		        		 window.location.reload();
 		       		},
 		     		error: function(){
-		     			alert("对不起，信息加载失败！");
+		     			alert("系统异常！");
 		       		}
 				});
 			}

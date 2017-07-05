@@ -117,9 +117,8 @@ public class NewsCategoryController {
 	
 	@ResponseBody
 	@PostMapping("/admin/newsCategoryEditState")
-	public ResObject<Object> register(NewsCategory newsCategory) {
-		int i = newsCategoryService.updateState(newsCategory);
-		System.out.println("i="+i);
+	public ResObject<Object> newsCategoryEditState(NewsCategory newsCategory) {
+		newsCategoryService.updateState(newsCategory);
 		ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
 		return object;
 	}
